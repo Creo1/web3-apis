@@ -8,16 +8,15 @@ export class CreateAccessKeyDto {
   @Length(1, 50, { message: 'name must be between 1 and 50 characters' })
   readonly name: string;
 
-  @IsOptional()
   @IsNotEmpty()
   readonly userId: mongoose.Schema.Types.ObjectId;
 
 
-  @IsOptional()
+  
   @IsNotEmpty()
   readonly rateLimit: number;
 
-  @IsOptional()
+ 
   @IsNotEmpty()
   readonly rateLimitTTLInMilliseconds: number; 
 

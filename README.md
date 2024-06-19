@@ -8,12 +8,12 @@
 1. Clone the repository:
 
   ```bash
-  git clone url
+  git clone https://github.com/Creo1/web3-apis.git
   ```
 
 2. Run the APIs:
 
-  npm install
+  npm install &
   npm run start:dev
 
 
