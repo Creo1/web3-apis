@@ -70,7 +70,6 @@ describe('AccessKeyService', () => {
   describe('create', () => {
     it('should create and return an access key', async () => {
       const newAccessKey = {
-        // _id: '61c0ccf11d7bf83d153d7c06',
         userId: new mongoose.Types.ObjectId('6672a487c0735ed106c1ec6a'),
         name: 'token4',
         rateLimit: 5,

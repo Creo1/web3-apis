@@ -141,27 +141,20 @@ export class AccessKeyService {
     if (currentDate.getTime() > new Date(accessKeyDetails.expiration).getTime()) {
       throw new BadRequestException('access key is expired');
     }
-  
+
     // Increment counter for this minute
     let currentCount = await this.cacheManager.get<number>(accessKeyDetails._id.toString());
-    console.log("currentCount", currentCount);
     if (!currentCount) {
-      console.log("currentCount not", currentCount);
       currentCount = 1;
       await this.cacheManager.set(accessKeyDetails._id.toString(), currentCount, accessKeyDetails.rateLimitTTLInMilliseconds);
-      //  await this.cacheManager.expire(key, overallTtl); // Set overall expiration
     } else {
-      console.log("yes currentCount", currentCount);
       currentCount++;
       await this.cacheManager.set(accessKeyDetails._id.toString(), currentCount, accessKeyDetails.rateLimitTTLInMilliseconds);
     }
-    console.log("currentCount limit", currentCount, accessKeyDetails.rateLimit);
     // Check if current count exceeds the limit
     if (currentCount > accessKeyDetails.rateLimit) {
       throw new BadRequestException('Rate limit exceeded');
     }
-
-
 
     try {
       //TODO: for now returning access key details as static data but need to fetch real token and return
