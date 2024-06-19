@@ -137,6 +137,10 @@ export class AccessKeyService {
     if (_.isEmpty(accessKeyDetails)) {
       throw new NotFoundException(responseMessage.ACCESS_KEY_NOT_FOUND);
     }
+
+    if (accessKeyDetails.status!==Status.ACTIVE) {
+      throw new BadRequestException('access key is not active');
+    }
     const currentDate = new Date();
     if (currentDate.getTime() > new Date(accessKeyDetails.expiration).getTime()) {
       throw new BadRequestException('access key is expired');
